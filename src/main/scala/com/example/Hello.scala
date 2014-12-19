@@ -16,19 +16,20 @@ object Hello {
       |ws.ssl {
         trustManager = {
         |    stores = [
-        |      { type = "JKS", path = "/Users/redarqas/projects/activator-play-tls-example/certs/exampletrust.jks" }
+        |      { type = "JKS", path = "/Users/redarqas/projects/resto-app/certs/exampletrust.jks", password = "changeit" }
         |    ]
         |  }
       |}
       """.stripMargin))
-    val env = play.api.Environment.simple(play.api.Mode.Dev)
+
+    val env = play.api.Environment.simple(play.api.Mode.Prod)
     val parser = new DefaultWSConfigParser(configuration, env)
     val builder = new NingAsyncHttpClientConfigBuilder(parser.parse())
     val secureClient : WSClient = new NingWSClient(builder.build())
-    val response = secureClient.url("https://www.example.com:8443/restaurants").get()
-    val s = response.map(r => r.status)
-    val result = Await.result(s, Duration.Inf)
+    val response = secureClient.url("https://example.com:8443/restaurants").get()
+    val result = Await.result(response, Duration.Inf)
 
-    println(s" =======> Hello, world! $result")
+    println(s" =======> Hello, world! ${result.body}")
+    sys.exit(0)
   }
 }
