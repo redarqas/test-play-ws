@@ -13,12 +13,20 @@ object Hello {
 
     val configuration = play.api.Configuration(ConfigFactory.parseString(
       """
-      |ws.ssl {
-        trustManager = {
+      |ws {
+       | ssl {
+       | timeout = 0
+       | trustManager = {
         |    stores = [
-        |      { type = "JKS", path = "/Users/redarqas/projects/resto-app/certs/exampletrust.jks", password = "changeit" }
+        |      { type = "JKS", path = "/Users/redarqas/projects/resto-app/certs/encryptAndTrust/exampletrust.jks", password = "changeit" }
         |    ]
         |  }
+       | keyManager = {
+        |    stores = [
+        |      { type: "JKS", path: "/Users/redarqas/projects/resto-app/certs/clientAuthOwnCA/client.jks", password: "lnooqzW8cv" },
+        |    ]
+        |  }
+       |  }
       |}
       """.stripMargin))
 

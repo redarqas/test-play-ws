@@ -16,5 +16,11 @@ libraryDependencies ++= List(
   "ch.qos.logback" % "logback-classic" % "1.1.2",
   "ch.qos.logback" % "logback-core" % "1.1.2",
   "com.typesafe.play" %% "play-ws" % "2.4.0-M2",
+  "org.apache.httpcomponents" % "httpclient" % "4.3.6",
+  "org.apache.httpcomponents" % "httpclient-cache" % "4.3.6",
+  "org.apache.httpcomponents" % "httpmime" % "4.3.6",
+  "org.apache.httpcomponents" % "httpcore" % "4.3.6",
+  "org.apache.httpcomponents" % "fluent-hc" % "4.3.6",
+  "commons-logging" % "commons-logging" % "1.1.3",
   "org.scalatest" %% "scalatest" % "2.1.6" % "test"
 )
