@@ -46,7 +46,7 @@ object Https {
       .build()
     val sslsf = new SSLConnectionSocketFactory(
       sslcontext,
-      Array( "TLSv1.1" ),
+      Array("TLSv1", "TLSv1.1", "TLSv1.2" ),
       null,
       SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER)
 
@@ -54,7 +54,7 @@ object Https {
       .setSSLSocketFactory(sslsf)
       .build()
 
-    val httpget = new HttpGet("https://example.com:8443/restaurants")
+    val httpget = new HttpGet("https://example.com:8443/")
     val response = httpclient.execute(httpget)
     val entity = response.getEntity()
     println("========================> " +response.getStatusLine())

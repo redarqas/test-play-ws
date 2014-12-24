@@ -1,34 +1,20 @@
 package com.example
 
+import java.io.File
+
 import com.typesafe.config.ConfigFactory
 import play.api.libs.ws._
 import play.api.libs.ws.ning._
 
 import scala.concurrent.{ExecutionContext, Await}
-import ExecutionContext.Implicits.global
+
 import scala.concurrent.duration.Duration
 
 object Hello {
   def main(args: Array[String]): Unit = {
 
-    val configuration = play.api.Configuration(ConfigFactory.parseString(
-      """
-      |ws {
-       | ssl {
-       | timeout = 0
-       | trustManager = {
-        |    stores = [
-        |      { type = "JKS", path = "/Users/redarqas/projects/resto-app/certs/encryptAndTrust/exampletrust.jks", password = "changeit" }
-        |    ]
-        |  }
-       | keyManager = {
-        |    stores = [
-        |      { type: "JKS", path: "/Users/redarqas/projects/resto-app/certs/clientAuthOwnCA/client.jks", password: "lnooqzW8cv" },
-        |    ]
-        |  }
-       |  }
-      |}
-      """.stripMargin))
+
+    val configuration = play.api.Configuration(ConfigFactory.parseFile(new File("/Users/redarqas/projects/resto-app/certs/ws.conf")))
 
     val env = play.api.Environment.simple(play.api.Mode.Prod)
     val parser = new DefaultWSConfigParser(configuration, env)
